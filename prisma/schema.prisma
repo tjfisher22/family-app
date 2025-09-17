@@ -13,16 +13,24 @@ datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
 }
-
+model User {
+    id         Int       @id @default(autoincrement())  
+    userName   String
+    email      String?   @unique
+    phone      String?
+}
 model Member {
     id         Int       @id @default(autoincrement())
     firstName  String
+    middleName String?
+    maidenName String?
     lastName   String
     birthDate  DateTime
     deathDate  DateTime?
     gender     String?
-    email      String?   @unique
-    phone      String?
+
+    owner   User?   @relation(fields: [ownerId], references: [id])
+    ownerId Int?
     // Self-relations
     parents    Parent[]  @relation("ChildParents")
     children   Parent[]  @relation("ParentChildren")
