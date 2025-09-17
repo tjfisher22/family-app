@@ -1,9 +1,22 @@
+
+
+"use client";
 import Image from "next/image";
+import { trpc } from "../utils/trpc";
 
 export default function Home() {
+  // Call the tRPC hello procedure
+  const { data, isLoading, error } = trpc.hello.useQuery({ name: "FamilyApp" });
+
   return (
     <div className="font-sans grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20">
       <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
+        {/* tRPC hello procedure output */}
+        <div className="mb-4 text-lg font-semibold">
+          {isLoading && "Loading greeting..."}
+          {error && `Error: ${error.message}`}
+          {data && data.greeting}
+        </div>
         <Image
           className="dark:invert"
           src="/next.svg"
