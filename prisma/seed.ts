@@ -1,4 +1,4 @@
-import { PrismaClient } from '../app/generated/prisma';
+import { PrismaClient } from '@prisma/client';
 const prisma = new PrismaClient();
 
 async function main() {
@@ -8,9 +8,7 @@ async function main() {
       firstName: 'Bilbo',
       lastName: 'Baggins',
       birthDate: new Date('2890-09-22'),
-      gender: 'Male',
-      email: 'bilbo@example.com',
-      phone: '123-456-7890',
+      gender: 'Male'
     },
   });
 
@@ -19,9 +17,7 @@ async function main() {
       firstName: 'Frodo',
       lastName: 'Baggins',
       birthDate: new Date('2968-09-22'),
-      gender: 'Male',
-      email: 'frodo@example.com',
-      phone: '987-654-3210',
+      gender: 'Male'
     },
   });
     const samwise = await prisma.member.create({
@@ -29,19 +25,16 @@ async function main() {
       firstName: 'Samewise',
       lastName: 'Gamgee',
       birthDate: new Date('2980-04-06'),
-      gender: 'Male',
-      email: 'samwise@example.com',
-      phone: '987-654-3210',
+      gender: 'Male'
     },
   });
+
     const rosie = await prisma.member.create({
     data: {
       firstName: 'Rosie',
       lastName: 'Cotton',
       birthDate: new Date('2984-04-06'),
-      gender: 'Female',
-      email: 'rosie@example.com',
-      phone: '987-654-3210',
+      gender: 'Female'
     },
   });
   
@@ -60,9 +53,7 @@ async function main() {
       firstName: 'Elanor',
       lastName: 'Gamgee',
       birthDate: new Date('3021-03-25'),
-      gender: 'Female',
-      email: 'elanor@example.com',
-      phone: '987-654-3210',
+      gender: 'Female'
     },
   });
 
