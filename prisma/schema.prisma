@@ -30,7 +30,7 @@ model Member {
     deathDate  DateTime?
     gender     String?
 
-    owner   User?   @relation(fields: [ownerId], references: [id])
+    owner   User?   @relation("UserFamilyMembers", fields: [ownerId], references: [id])
     ownerId Int?
     // Self-relations
     parents    Parent[]  @relation("ChildParents")
