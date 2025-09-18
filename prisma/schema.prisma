@@ -18,6 +18,7 @@ model User {
     userName   String
     email      String?   @unique
     phone      String?
+    members    Member[]  @relation("UserFamilyMembers")
 }
 model Member {
     id         Int       @id @default(autoincrement())
