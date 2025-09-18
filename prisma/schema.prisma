@@ -1,0 +1,63 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+  output   = "../app/generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+model User {
+    id         Int       @id @default(autoincrement())  
+    userName   String
+    email      String?   @unique
+    phone      String?
+    members    Member[]  @relation("UserFamilyMembers")
+}
+model Member {
+    id         Int       @id @default(autoincrement())
+    firstName  String
+    middleName String?
+    maidenName String?
+    lastName   String
+    birthDate  DateTime
+    deathDate  DateTime?
+    gender     String?
+
+    owner   User?   @relation("UserFamilyMembers", fields: [ownerId], references: [id])
+    ownerId Int?
+    // Self-relations
+    parents    Parent[]  @relation("ChildParents")
+    children   Parent[]  @relation("ParentChildren")
+    spouses1   Spouse[]  @relation("Spouse1")
+    spouses2   Spouse[]  @relation("Spouse2")
+}
+
+model Parent {
+    parentId   Int
+    childId    Int
+
+    parent     Member @relation("ParentChildren", fields: [parentId], references: [id])
+    child      Member @relation("ChildParents", fields: [childId], references: [id])
+
+    @@id([parentId, childId])
+}
+
+model Spouse {
+    spouse1Id  Int
+    spouse2Id  Int
+
+    spouse1    Member @relation("Spouse1", fields: [spouse1Id], references: [id])
+    spouse2    Member @relation("Spouse2", fields: [spouse2Id], references: [id])
+
+    marriedAt  DateTime?
+    divorcedAt DateTime?
+
+    @@id([spouse1Id, spouse2Id])
+}
