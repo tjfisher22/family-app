@@ -13,7 +13,7 @@ export default function Home() {
       <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
         {/* tRPC hello procedure output */}
         <div className="mb-4 text-lg font-semibold">
-          {isLoading && "Loading greeting..."}
+          {isLoading && "Loading greeting Test..."}
           {error && `Error: ${error.message}`}
           {data && data.greeting}
         </div>
