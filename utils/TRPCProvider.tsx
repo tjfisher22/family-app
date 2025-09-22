@@ -12,8 +12,7 @@ export function TRPCProvider({ children }: { children: ReactNode }) {
         httpBatchLink({
           url: '/api/trpc',
           fetch: (input, init) => {
-            // Log method
-            console.log('tRPC fetch method:', init?.method);
+            console.log('TRPC FETCH URL:', input, 'METHOD:', init?.method);
             return fetch(input, { ...init, method: 'POST' });
           },
         }),
