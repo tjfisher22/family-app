@@ -13,9 +13,9 @@ export default function Home() {
       <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
         {/* tRPC hello procedure output */}
         <div className="mb-4 text-lg font-semibold">
-          {isLoading && "Loading greeting Test..."}
+          {isLoading && "Loading greeting..."}
           {error && `Error: ${error.message}`}
-          {data && data.greeting}
+          {data && data.greeting ? data.greeting : !isLoading && !error && "No greeting available."}
         </div>
         <Image
           className="dark:invert"
