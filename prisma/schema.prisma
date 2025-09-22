@@ -18,6 +18,7 @@ model User {
     userName   String
     email      String?   @unique
     phone      String?
+    members    Member[]  @relation("UserFamilyMembers")
 }
 model Member {
     id         Int       @id @default(autoincrement())
@@ -29,7 +30,7 @@ model Member {
     deathDate  DateTime?
     gender     String?
 
-    owner   User?   @relation(fields: [ownerId], references: [id])
+    owner   User?   @relation("UserFamilyMembers", fields: [ownerId], references: [id])
     ownerId Int?
     // Self-relations
     parents    Parent[]  @relation("ChildParents")
