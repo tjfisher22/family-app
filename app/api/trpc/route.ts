@@ -1,5 +1,3 @@
-
-
 import { appRouter } from './router';
 import { fetchRequestHandler } from '@trpc/server/adapters/fetch';
 
@@ -28,5 +26,5 @@ const handler = async (req: Request) => {
   }
 };
 
-export const GET = handler;
-export const POST = handler;
+export { handler as GET, handler as POST };
+export default handler;
