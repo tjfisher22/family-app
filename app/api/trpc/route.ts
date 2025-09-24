@@ -1,6 +1,8 @@
 import { appRouter } from './router';
 import { fetchRequestHandler } from '@trpc/server/adapters/fetch';
 
+export const runtime = 'nodejs';
+
 const handler = async (req: Request) => {
   console.log('tRPC handler called:', req.method, req.url);
   try {
@@ -26,5 +28,13 @@ const handler = async (req: Request) => {
   }
 };
 
-export { handler as GET, handler as POST };
+export async function GET() {
+  return new Response(JSON.stringify({ ok: true }), { status: 200 });
+}
+
+export async function POST() {
+  return new Response(JSON.stringify({ ok: true }), { status: 200 });
+}
+
+//export { handler as GET, handler as POST };
 export default handler;
